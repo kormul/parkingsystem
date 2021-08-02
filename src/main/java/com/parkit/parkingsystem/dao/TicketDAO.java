@@ -36,8 +36,9 @@ public class TicketDAO {
             logger.error("Error fetching next available slot",ex);
         }finally {
             dataBaseConfig.closeConnection(con);
-            return false;
         }
+        return false;
+
     }
 
     public Ticket getTicket(String vehicleRegNumber) {
@@ -65,8 +66,9 @@ public class TicketDAO {
             logger.error("Error fetching next available slot",ex);
         }finally {
             dataBaseConfig.closeConnection(con);
-            return ticket;
         }
+        return ticket;
+
     }
 
     public boolean updateTicket(Ticket ticket) {
@@ -86,4 +88,23 @@ public class TicketDAO {
         }
         return false;
     }
+    
+    public int countAllTicket(String vehiculeRegNumber){// COUNT_ALL_TICKET 
+    	Connection con = null;
+    	try {
+    		con = dataBaseConfig.getConnection();
+    		PreparedStatement ps = con.prepareStatement(DBConstants.COUNT_ALL_TICKET);
+    		ps.setString(1, vehiculeRegNumber);
+    		ResultSet rs = ps.executeQuery();
+    		if(rs.next())
+    			return rs.getInt("total");
+    		
+    	}catch (Exception ex) {
+            logger.error("Error fetching count all ticket",ex);
+		}finally {
+			dataBaseConfig.closeConnection(con);
+		}
+    	return 0;
+    }
+
 }
