@@ -15,7 +15,7 @@ public class FareCalculatorService {
         double priceRate = 1.0;
      
         //TODO: Some tests are failing here. Need to check if this logic is correct
-        double duration = (outTime - inTime-1800000.0)/3600000;
+        double duration = (outTime - inTime-1800000.0)/3600000.0;
         duration = duration <0 ? 0 : duration;
         if(count>3)
         	priceRate = 0.95;
